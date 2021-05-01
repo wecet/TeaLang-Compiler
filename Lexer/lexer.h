@@ -21,6 +21,11 @@ namespace lexer{
         bool isLetter(char argc);
         bool isNumber(char argc);
         bool isPrintable(char argc);
+
+        bool isPlus(char argc);
+        bool isStar(char argc);
+        bool isMinus(char argc);
+        bool isEquals(char argc);
        
     class lexer{
 
