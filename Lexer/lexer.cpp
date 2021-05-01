@@ -34,3 +34,26 @@ bool lexer::isPrintable(char argc){
     return (std::regex_match(argv, printable));
     
 }
+
+//Arithmetic Symbols
+bool lexer::isPlus(char argc){
+
+    return argc == '+';
+}
+
+bool lexer::isStar(char argc){
+
+    return argc == 'x';
+}
+
+bool lexer::isMinus(char argc){
+
+    return argc == '-';
+}
+
+bool lexer::isEquals(char argc){
+
+    return argc == '=';
+}
+
+
