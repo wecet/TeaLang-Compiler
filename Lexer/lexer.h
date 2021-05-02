@@ -9,6 +9,8 @@
 #include <regex>
 #include <vector>
 
+#include "token.h"
+
 
 namespace lexer{
 
@@ -16,6 +18,28 @@ namespace lexer{
         extern std::regex letter;
         extern std::regex number;
         extern std::regex printable;
+
+        enum TransitionType{
+            
+            LETTER = 0,
+            NUMBER = 1,
+            PRINTABLE = 2,
+            PLUS = 6,
+            STAR = 5,
+            MINUS = 8,
+            EQUALS = 14,
+            FULLSTOP = 3,
+            UNDERSCORE = 4,
+            RELATIONAL = 7,
+            FORWARDSLASH = 9,
+            BACKSLASH = 10,
+            QUOTES = 12,
+            SPACE = 18,
+            PUNCTUATION = 11,
+            EXLAMATION = 15,
+            NEWLINE = 13,
+            INVALID = 17
+        };
 
         //Boolean Functions 
         bool isLetter(char argc);
@@ -37,6 +61,12 @@ namespace lexer{
         bool isUnderscore(char argc);
         bool isFullstop(char argc);
 
+        std::vector<Token> tealang_tokens;
+        Token getNextToken();
+        Token getLookahead();
+
+        unsigned int position;
+
     class lexer{
 
     public:
@@ -44,6 +74,8 @@ namespace lexer{
         lexer();
         virtual ~lexer();
         lexer(std::string tealang);
+
+        static TransitionType setTransitionType(char argc);
 
     private:
 
