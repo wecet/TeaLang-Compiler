@@ -7,8 +7,34 @@ std::regex lexer::letter("[A-Za-z]");
 std::regex lexer::number("[0-9]");
 std::regex lexer::printable("[\\x20-\\x7E]");
 
+//Overloaded Constructors for Lexer
 lexer::lexer::lexer() = default;
+
 lexer::lexer::~lexer() = default;
+
+lexer::lexer::lexer(std::string tealang){
+
+    std::cout << "[LEXER] Loading Program..." << tealang << std::endl;
+    std::ifstream TeaLang;
+    TeaLang.open(tealang.c_str());
+
+    input = "";
+    if(TeaLang.is_open()){
+        std::cout << "[LEXER] Reading Program...";
+        std::string line;
+        while(std::getline(TeaLang, line)){
+            input.append(line + '\n');
+        }
+        
+    }
+    else{
+        std::cout << "[LEXER] ERROR: File does not exist" << std::endl;
+    }
+    TeaLang.close();
+
+    cIndex = 0;
+    linenum = 1;
+}
 
 // -- Defining Expressions --
 bool lexer::isLetter(char argc){
