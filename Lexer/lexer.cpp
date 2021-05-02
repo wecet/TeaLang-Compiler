@@ -138,4 +138,48 @@ bool lexer::isSpaceState(unsigned int state){
     return state == 2 || state == 10 || state == 11 || state == 12 || state == 13;
 }
 
+//Transition Operations
+lexer::TransitionType lexer::lexer::setTransitionType(char argc){
+    if(isLetter(argc)) return LETTER;
+    if(isNumber(argc)) return NUMBER;
+    if(isPlus(argc)) return PLUS;
+    if(isStar(argc)) return STAR;
+    if(isMinus(argc)) return MINUS;
+    if(isEquals(argc)) return EQUALS;
+    if(isFullstop(argc)) return FULLSTOP;
+    if(isUnderscore(argc)) return UNDERSCORE;
+    if(isGreaterLess(argc)) return RELATIONAL;
+    if(isForwardSlash(argc)) return FORWARDSLASH;
+    if(isBackSlash(argc)) return BACKSLASH;
+    if(isQuotes(argc)) return QUOTES;
+    if(isSpace(argc)) return SPACE;
+    if(isPunct(argc)) return PUNCTUATION;
+    if(isExlamation(argc)) return EXLAMATION;
+    if(isNL(argc)) return NEWLINE;
+    
+    if(isPrintable(argc)) return PRINTABLE;
+    return INVALID;
+}
+
+//Token Operations
+Token lexer::getNextToken(){
+
+    while(tealang_tokens[position].tokentype == TOK_Comment){
+        position++;
+    }
+
+    return tealang_tokens[position++];
+}
+
+Token lexer::getLookahead(){
+
+    unsigned int argv = position;
+
+    while(tealang_tokens[argv].tokentype == TOK_Comment){
+        argv++;
+    }
+
+    return tealang_tokens[argv];
+}
+
 #pragma clang diagnostic pop
