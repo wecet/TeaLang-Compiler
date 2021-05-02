@@ -82,4 +82,60 @@ bool lexer::isEquals(char argc){
     return argc == '=';
 }
 
+//General Symbols
+bool lexer::isFullstop(char argc){
 
+    return argc == '.';
+}
+
+bool lexer::isUnderscore(char argc){
+
+    return argc == '_';
+}
+
+bool lexer::isGreaterLess(char argc){
+
+    return argc == '<' || argc == '>';
+}
+
+bool lexer::isForwardSlash(char argc){
+
+    return argc == '/';
+}
+
+bool lexer::isBackSlash(char argc){
+
+    return argc == '\\';
+}
+
+bool lexer::isQuotes(char argc){
+
+    return argc == '"';
+}
+
+bool lexer::isSpace(char argc){
+
+    return argc == ' ';
+}
+
+bool lexer::isPunct(char argc){
+
+    return argc == '{' || argc == '}' || argc == '(' || argc == ')' || argc == ',' || argc == ';' || argc == ':';
+}
+
+bool lexer::isExlamation(char argc){
+
+    return argc == '!';
+}
+
+bool lexer::isNL(char argc){
+
+    return argc == '\n';
+}
+
+bool lexer::isSpaceState(unsigned int state){
+
+    return state == 2 || state == 10 || state == 11 || state == 12 || state == 13;
+}
+
+#pragma clang diagnostic pop
