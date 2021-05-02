@@ -32,7 +32,14 @@ namespace lexer{
     public:
 
         lexer();
-        ~lexer();
+        virtual ~lexer();
+        lexer(std::string tealang);
+
+    private:
+
+        std::string input;
+        int cIndex;
+        int linenum;    
 
     };
 
