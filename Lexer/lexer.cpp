@@ -162,7 +162,7 @@ lexer::TransitionType lexer::lexer::setTransitionType(char argc){
 }
 
 //Token Operations
-Token lexer::getNextToken(){
+token lexer::getNextToken(){
 
     while(tealang_tokens[position].tokentype == TOK_Comment){
         position++;
@@ -171,7 +171,7 @@ Token lexer::getNextToken(){
     return tealang_tokens[position++];
 }
 
-Token lexer::getLookahead(){
+token lexer::getLookahead(){
 
     unsigned int argv = position;
 

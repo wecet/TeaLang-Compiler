@@ -61,9 +61,9 @@ namespace lexer{
         bool isUnderscore(char argc);
         bool isFullstop(char argc);
 
-        std::vector<Token> tealang_tokens;
-        Token getNextToken();
-        Token getLookahead();
+        std::vector<token> tealang_tokens;
+        token getNextToken();
+        token getLookahead();
 
         unsigned int position;
 
