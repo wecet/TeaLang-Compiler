@@ -143,6 +143,116 @@ std::vector<std::pair<std::string, std::string>> SScope::list(){
     return std::move(argc);
 }
 
+/*
+    Semantic Analysis from Visitor
+                                    */
+
+//Constructor
+Analysis::Analysis(){
+    scopes.push_back(new SScope());
+}
+
+//Overloaded Constructor
+Analysis::Analysis(SScope* global){
+    scopes.push_back(global);
+}
+
+//Deconstructor
+Analysis::~Analysis() = default;
+
+/*
+    Visitors
+              */
+
+void Analysis::visit(parser::ASTProgramNode *program_node){
+    for(auto &argc : program_node -> argc){
+        argc -> accept(this)
+    }
+}
+
+void Analysis::visit(parser::ASTDeclarationNode *declaration_node){
+    
+}
+
+void Analysis::visit(parser::ASTAssignmentNode *assignment_node){
+
+}
+
+void Analysis::visit(parser::ASTPrintNode *print_node){
+    print_node -> argc -> accept(this);
+
+}
+
+void Analysis::visit(parser::ASTReturnNode *return_node){
+
+}
+
+void Analysis::visit(parser::ASTBlockNode *block_node){
+
+}
+
+void Analysis::visit(parser::ASTIfNode *if_node){
+
+}
+
+void Analysis::visit(parser::ASTWhileNode *while_node){
+
+}
+
+void Analysis::visit(parser::ASTFunctionDefNode *func_def_node){
+
+}
+
+void Analysis::visit(parser::ASTLiteralNode<int>*) {
+    type = parser::INT;
+}
+
+void Analysis::visit(parser::ASTLiteralNode<float>*) {
+    type = parser::REAL;
+}
+
+void Analysis::visit(parser::ASTLiteralNode<bool>*) {
+    type = parser::BOOL;
+}
+
+void Analysis::visit(parser::ASTLiteralNode<std::string>*) {
+    type = parser::STRING;
+}
+
+void Analysis::visit(parser::ASTBinaryNode *binary_node){
+
+}
+
+void Analysis::visit(parser::ASTIdentifierNode *identifier_node){
+
+}
+
+void Analysis::visit(parser::ASTUnaryNode *unary_node){
+
+}
+
+void Analysis::visit(parser::ASTFunctionCallNode *func_call_node){
+
+}
+
+std::string stringtype(parser::VAR_TYPE type){
+    switch(type){
+        case parser::INT:
+            return "int";
+        case parser::REAL:
+            return "real";
+        case parser::BOOL:
+            return "bool";
+        case parser::STRING:
+            return "string";
+        default:
+            std::cout << "Invalid Type" << type << std::endl;
+    }
+}
+
+bool Analysis::ret(parser::ASTStatementNode *statement_node){
+    
+}
 
 
 
