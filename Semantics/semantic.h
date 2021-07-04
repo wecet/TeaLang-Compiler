@@ -19,11 +19,11 @@ namespace visitor{
             //Overloaded Function
             void declare(std::string, parser::VAR_TYPE, std::vector<parser::VAR_TYPE>, unsigned int);
 
-            parser::VAR_TYPE type(std::string);
-            parser::VAR_TYPE type(std::string, std::vector<parser::VAR_TYPE>);
+            parser::VAR_TYPE type_check(std::string);
+            parser::VAR_TYPE type_check(std::string, std::vector<parser::VAR_TYPE>);
 
-            unsigned int line(std::string);
-            unsigned int line(std::string, std::vector<parser::VAR_TYPE>);
+            unsigned int check_line(std::string);
+            unsigned int check_line(std::string, std::vector<parser::VAR_TYPE>);
 
             std::vector<std::pair<std::string, std::string>> list();
 
