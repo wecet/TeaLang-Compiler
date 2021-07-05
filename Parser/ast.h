@@ -138,11 +138,11 @@ namespace parser{
         void accept(visitor::Visitor*) override;
     };
 
-    class ASTFunctionDefNode : public ASTStatementNode{
+    class ASTFunctionNode : public ASTStatementNode{
         public:
 
         //Creating Signature for ASTDeclarationNode Creation in CPP File
-        ASTFunctionDefNode(std::string, std::vector<std::pair<std::string, VAR_TYPE>>, VAR_TYPE, ASTBlockNode*, unsigned int);
+        ASTFunctionNode(std::string, std::vector<std::pair<std::string, VAR_TYPE>>, VAR_TYPE, ASTBlockNode*, unsigned int);
 
         std::string type;
         std::vector<std::pair<std::string, VAR_TYPE>> params;

@@ -132,10 +132,6 @@ namespace parser{
 
 }
 
-void ASTFunctionCallNode::accept(visitor::Visitor *visit){
-    visit->visit(this);
-}
-
 void ASTIdentifierNode::accept(visitor::Visitor *visit){
     visit->visit(this);
 }
@@ -172,7 +168,7 @@ void ASTWhileNode::accept(visitor::Visitor *visit){
     visit->visit(this);
 }
 
-void ASTFunctionDefNode::accept(visitor::Visitor *visit){
+void ASTFunctionCallNode::accept(visitor::Visitor *visit){
     visit->visit(this);
 }
 
