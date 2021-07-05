@@ -58,7 +58,7 @@ ASTWhileNode::ASTWhileNode(ASTExprNode *condition, ASTBlockNode *whileblock, uns
 
 {}
 
-ASTFunctionDefNode::ASTFunctionDefNode(std::string type, std::vector<std::pair<std::string, VAR_TYPE>> params, VAR_TYPE functype, ASTBlockNode *funcblock, unsigned int line):
+ASTFunctionNode::ASTFunctionNode(std::string type, std::vector<std::pair<std::string, VAR_TYPE>> params, VAR_TYPE functype, ASTBlockNode *funcblock, unsigned int line):
     type(std::move(type)),
     params(std::move(params)),
     functype(functype),
