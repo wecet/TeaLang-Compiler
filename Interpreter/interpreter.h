@@ -20,22 +20,24 @@ namespace visitor{
 
     class IScope{
 
-        bool already_referenced(std::string);
-        //Overloaded Function
-        bool already_referenced(std::string, std::vector<parser::VAR_TYPE>);
+        public:
 
-        void declare(std::string, int);
-        void declare(std::string, float);
-        void declare(std::string, bool);
-        void declare(std::string, std::string);
-        void declare(std::string, std::vector<parser::VAR_TYPE>, std::vector<std::string>, parser::ASTBlockNode*);
+            bool already_referenced(std::string);
+            //Overloaded Function
+            bool already_referenced(std::string, std::vector<parser::VAR_TYPE>);
 
-        parser::VAR_TYPE vartype_of(std::string);
-        variable content(std::string);
-        std::vector<std::string> names(std::string, std::vector<parser::VAR_TYPE>);
-        parser::ASTBlockNode* block(std::string, std::vector<parser::VAR_TYPE>);
+            void declare(std::string, int);
+            void declare(std::string, float);
+            void declare(std::string, bool);
+            void declare(std::string, std::string);
+            void declare(std::string, std::vector<parser::VAR_TYPE>, std::vector<std::string>, parser::ASTBlockNode*);
 
-        std::vector<std::tuple<std::string, std::string, std::string>> varlist();
+            parser::VAR_TYPE vartype_of(std::string);
+            variable content(std::string);
+            std::vector<std::string> names(std::string, std::vector<parser::VAR_TYPE>);
+            parser::ASTBlockNode* block(std::string, std::vector<parser::VAR_TYPE>);
+
+            std::vector<std::tuple<std::string, std::string, std::string>> varlist();
 
     private:
         std::map<std::string, std::pair<parser::VAR_TYPE, variable>> vartable;
@@ -68,7 +70,7 @@ namespace visitor{
             void visit(parser::ASTUnaryNode*) override;
             void visit(parser::ASTFunctionCallNode*) override;
 
-            std::pair<parser::VAR_TYPE, variable> expression;
+            std::pair<parser::VAR_TYPE, variable> expr;
 
         private:
             std::vector<IScope*> scopes;
