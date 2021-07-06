@@ -64,7 +64,7 @@ namespace visitor{
             std::vector<SScope*> scopes;
             std::stack<parser::VAR_TYPE> funcs;
 
-            parser::VAR_TYPE type;
+            parser::VAR_TYPE types;
             std::vector<std::pair<std::string, parser::VAR_TYPE>> params;
 
             bool ret(parser::ASTStatementNode*);
