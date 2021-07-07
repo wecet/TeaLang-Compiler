@@ -297,3 +297,147 @@ std::pair<std::string, VAR_TYPE>* Parser::parsefparam(){
     return new std::pair<std::string, VAR_TYPE>(id, type);
 }
 
+ASTExprNode* Parser::parsexpr(){
+    ASTExprNode *argc = parse_sing_expr();
+    unsigned int number = current.number;
+
+    if(next.type == lexer::TOK_RelOp){
+        pop_token();
+        return new ASTBinaryNode(current.lexeme, argc, parsexpr(), number);
+    }
+
+    return argc;
+}
+
+ASTExprNode* Parser::parse_sing_expr(){
+    ASTExprNode *term = parseterm();
+    unsigned int number = current.number;
+
+    if(next.type == lexer::TOK_AdditiveOp){
+        pop_token();
+        return new ASTBinaryNode(current.lexeme, term, parse_sing_expr(), number);
+    }
+
+    return term;
+}
+
+ASTExprNode* Parser::parseterm(){
+    ASTExprNode *f = parsefactor();
+    unsigned int number = current.number;
+
+    if(next.type == lexer::TOK_MultiplicativeOp){
+        pop_token();
+        return new ASTBinaryNode(current.lexeme, f, parseterm(), number);
+    }
+
+    return f;
+}
+
+ASTExprNode *Parser::parsefactor(){
+    pop_token();
+
+    unsigned int number = current.number;
+    switch(current.type){
+        //Variable Literals
+        case lexer::TOK_IntLiteral:
+            return new ASTLiteralNode<int>(std::stoi(current.lexeme), number);
+        case lexer::TOK_FloatLiteral:
+            return new ASTLiteralNode<float>(std::stoi(current.lexeme), number);
+        case lexer::TOK_Boolean:
+            return new ASTLiteralNode<bool>(std::stoi(current.lexeme), number);
+
+        case lexer::TOK_String:{
+            std::string argc = current.lexeme.substr(1, current.lexeme.size() - 2);
+            size_t pointer = argc.find("\\\"");
+
+            while(pointer != std::string::npos){
+                argc.replace(pointer, 2, "\"");
+                pointer = argc.find("\\\"", pointer + 2);
+            }
+
+            //Setting /s as New Line 
+            pointer = argc.find("\\n");
+            while(pointer != std::string::npos){
+                argc.replace(pointer, 2, "\n");
+                pointer = argc.find("\\n", pointer + 2);
+            }
+
+            //Setting /t as Tab
+            pointer = argc.find("\\t");
+            while(pointer != std::string::npos){
+                argc.replace(pointer, 2, "\t");
+                pointer = argc.find("\\t", pointer + 2);
+            }
+
+            return new ASTLiteralNode<std::string>(std::move(argc), number);
+        }
+
+        case lexer::TOK_Identifier:
+            if(next.type == lexer::TOK_OpenParenthesis){
+                return parsefunc();
+            }
+            else return new ASTIdentifierNode(current.lexeme, number);
+
+        case lexer::TOK_AdditiveOp:
+        case lexer::TOK_Not:
+            return new ASTUnaryNode(current.lexeme, parsexpr(), number);
+
+        default:
+            std::cout << "Expected Expression" << std::endl;
+            break;
+    }
+}
+
+ASTFunctionCallNode* Parser::parsefunc(){
+    std::string id = current.lexeme;
+    auto *params = new std::vector<ASTExprNode*>;
+    unsigned int number = current.number;
+
+    pop_token();
+    if(current.type != lexer::TOK_OpenParenthesis){
+        std::cout << "Expected (" << std::endl;
+    }
+
+    if(next.type != lexer::TOK_CloseParenthesis){
+        params = parseparams();
+    }
+    else{
+        pop_token();
+    }
+
+    if(current.type != lexer::TOK_CloseParenthesis){
+        std::cout << "Expected )" << std::endl;
+    }
+
+    return new ASTFunctionCallNode(id, *params, number);
+}
+
+std::vector<ASTExprNode*>* Parser::parseparams(){
+    auto params = new std::vector<ASTExprNode*>;
+    params->push_back(parsexpr());
+
+    pop_token();
+
+    while(current.type == lexer::TOK_Comma){
+        params->push_back(parsexpr());
+        pop_token();
+    }
+
+    return params;
+}
+
+VAR_TYPE Parser::parsetype(std::string& id){
+    switch(current.type){
+        case lexer::TOK_IntLiteral:
+            return INT;
+        case lexer::TOK_FloatLiteral:
+            return FLOAT;
+        case lexer::TOK_Boolean:
+            return BOOL;
+        case lexer::TOK_String:
+            return STRING;
+
+        default:
+            std::cout << "Unknown Type " << std::endl;
+    }
+}
