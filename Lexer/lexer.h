@@ -61,27 +61,26 @@ namespace lexer{
         bool isUnderscore(char argc);
         bool isFullstop(char argc);
 
-        std::vector<token> tealang_tokens;
-        token getNextToken();
-        token getLookahead();
-
         unsigned int position;
 
-    class lexer{
+    class Lexer{
 
     public:
 
-        lexer();
-        virtual ~lexer();
-        lexer(std::string tealang);
-
+        Lexer();
+        virtual ~Lexer();
+        Lexer(std::string tealang);
         static TransitionType setTransitionType(char argc);
-
+        token getNextToken();
+        token getLookahead();
+        
     private:
 
         std::string input;
         int cIndex;
         int linenum;    
+        std::vector<token> tealang_tokens;
+        
 
     };
 

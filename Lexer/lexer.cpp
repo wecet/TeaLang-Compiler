@@ -8,11 +8,11 @@ std::regex lexer::number("[0-9]");
 std::regex lexer::printable("[\\x20-\\x7E]");
 
 //Overloaded Constructors for Lexer
-lexer::lexer::lexer() = default;
+lexer::Lexer::Lexer() = default;
 
-lexer::lexer::~lexer() = default;
+lexer::Lexer::~Lexer() = default;
 
-lexer::lexer::lexer(std::string tealang){
+lexer::Lexer::Lexer(std::string tealang){
 
     std::cout << "[LEXER] Loading Program..." << tealang << std::endl;
     std::ifstream TeaLang;
@@ -139,7 +139,7 @@ bool lexer::isSpaceState(unsigned int state){
 }
 
 //Transition Operations
-lexer::TransitionType lexer::lexer::setTransitionType(char argc){
+lexer::TransitionType lexer::Lexer::setTransitionType(char argc){
     if(isLetter(argc)) return LETTER;
     if(isNumber(argc)) return NUMBER;
     if(isPlus(argc)) return PLUS;
@@ -162,20 +162,20 @@ lexer::TransitionType lexer::lexer::setTransitionType(char argc){
 }
 
 //Token Operations
-token lexer::getNextToken(){
+token lexer::Lexer::getNextToken(){
 
-    while(tealang_tokens[position].tokentype == TOK_Comment){
+    while(tealang_tokens[position].type == TOK_Comment){
         position++;
     }
 
     return tealang_tokens[position++];
 }
 
-token lexer::getLookahead(){
+token lexer::Lexer::getLookahead(){
 
     unsigned int argv = position;
 
-    while(tealang_tokens[argv].tokentype == TOK_Comment){
+    while(tealang_tokens[argv].type == TOK_Comment){
         argv++;
     }
 

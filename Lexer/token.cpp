@@ -36,10 +36,8 @@ TOKEN token::settype(int final, std::string &argc){
             return TOK_RelOp;
 
         case 10:
-            if(argc == "var")
-                return TOK_Var;
-            else if(argc == "set")
-                return TOK_Set;
+            if(argc == "let")
+                return TOK_Let;
             else if(argc == "def")
                 return TOK_Def;
             else if(argc == "return")
@@ -54,8 +52,8 @@ TOKEN token::settype(int final, std::string &argc){
                 return TOK_Print;
             else if(argc == "int")
                 return TOK_IntLiteral;
-            else if(argc == "var")
-                return TOK_Var;
+            else if(argc == "float")
+                return TOK_FloatLiteral;
             else if(argc == "bool")
                 return TOK_Boolean;
             else if(argc == "string")
