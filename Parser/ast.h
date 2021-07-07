@@ -113,7 +113,9 @@ namespace parser{
     class ASTIfNode : public ASTStatementNode{
         public:
 
+        ASTIfNode(ASTExprNode*, ASTBlockNode*, unsigned int);
         //Creating Signature for ASTDeclarationNode Creation in CPP File  
+        ASTIfNode(ASTExprNode*, ASTBlockNode*, unsigned int, ASTBlockNode*);
         ASTIfNode(ASTExprNode*, ASTBlockNode*, unsigned int, ASTExprNode*, ASTBlockNode* = nullptr);
 
         ASTExprNode *comparison;

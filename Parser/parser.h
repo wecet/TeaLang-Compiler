@@ -45,7 +45,7 @@ namespace parser{
             ASTExprNode* parsefactor();
             ASTFunctionCallNode parsefunc();
 
-            VAR_TYPE type(std::string&);
+            VAR_TYPE parsetype(std::string&);
             std::vector<ASTExprNode*> *parseparams();
             std::pair<std::string, VAR_TYPE>* parsefparam();
     };
