@@ -90,9 +90,9 @@ The goal of this project is to create a working compiler, lexer and interpreter 
 
 ### Code
 
-   float Square(x:float){
-        return x*x;
-    }
+           float Square(x:float){
+                return x*x;
+            }
 
     bool XGreaterThanY(x:float, y:float){
         let ans:bool = true;
