@@ -1,6 +1,9 @@
-# TeaLang-Compiler-and-Lexer
-
+# TeaLang
 The goal of this project is to create a working compiler, lexer and interpreter for the TeaLang language whilst also considering the semantics of the code. A snippet of TeaLang code can be found below.
+
+# Tea2Lang 
+
+Found in its corresponding directory is an improvement than the below defined TeaLang. The differences include an addition of acceptance of 'char' and 'auto' variables. Alongside the new opportunity to create structs, arrays and overloaded functions.
 
     float Square(x:float){
         return x*x;
@@ -33,3 +36,5 @@ The goal of this project is to create a working compiler, lexer and interpreter 
     print XGreaterThanYv2(Square(1.5), y);
     print AverageOfThree(x, y, 1.2);
     print JoinStr("Hello", "World");
+    
+    
